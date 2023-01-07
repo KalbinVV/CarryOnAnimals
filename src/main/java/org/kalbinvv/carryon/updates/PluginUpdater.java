@@ -11,16 +11,18 @@ public class PluginUpdater {
 
 	private static final Double LAST_PLUGIN_VERSION = 1.3;
 	private static final String CONFIGURATION_FILE_NAME = "config.yml";
+	
+	private boolean pluginWasUpdated = false;
+	private Double currentPluginVersion;
 
 	public void update(FileConfiguration configuration) {
-		Double currentPluginVersion = 1.0;
 
 		if(configuration.contains(Migration.VERSION_PATH)) {
 			currentPluginVersion = configuration.getDouble(Migration.VERSION_PATH);
 		}
 
-		if(currentPluginVersion < LAST_PLUGIN_VERSION) {
-			Migration migration = Migration.getRequiredMigration(currentPluginVersion);
+		if(getCurrentPluginVersion() < LAST_PLUGIN_VERSION) {
+			Migration migration = Migration.getRequiredMigration(getCurrentPluginVersion());
 
 			migration.migrate(configuration);
 
@@ -32,10 +34,21 @@ public class PluginUpdater {
 				e.printStackTrace();
 			}
 			
-			if(migration.getVersionOfMigration() < LAST_PLUGIN_VERSION) {
+			pluginWasUpdated = true;
+			currentPluginVersion = migration.getVersionOfMigration();
+			
+			if(getCurrentPluginVersion() < LAST_PLUGIN_VERSION) {
 				update(configuration);
 			}
 		}
+	}
+
+	public boolean isPluginWasUpdated() {
+		return pluginWasUpdated;
+	}
+
+	public Double getCurrentPluginVersion() {
+		return currentPluginVersion;
 	}
 
 }

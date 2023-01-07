@@ -12,7 +12,6 @@ public class WorldGuardFlag {
 	private static boolean registered = false;
 	
 	public static void register() {
-		
 		FlagRegistry registry = WorldGuard.getInstance().getFlagRegistry();
 	    try {
 	        StateFlag flag = new StateFlag(FlagName, true);

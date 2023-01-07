@@ -47,7 +47,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 					helpMessage, 
 					player);
 		}else {
-			Logger logger = CarryOn.getPluginLogger();
+			Logger logger = CarryOn.getPlugin().getLogger();
 			logger.info(
 					ChatUtils.removeAllColorsCodes(helpMessage));
 		}
@@ -80,7 +80,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 						player);
 			}
 		}else {
-			CarryOn.getPluginLogger().info(
+			CarryOn.getPlugin().getLogger().info(
 					ChatUtils.removeAllColorsCodes(reloadMessage));
 		}
 
@@ -117,7 +117,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 						player);
 			}
 		}else {
-			CarryOn.getPluginLogger().info(
+			CarryOn.getPlugin().getLogger().info(
 					ChatUtils.removeAllColorsCodes(protectionsMessage));
 		}
 

@@ -1,12 +1,12 @@
 package org.kalbinvv.carryon.protections.worldguard;
 
 import org.bukkit.entity.Entity;
+
 import org.bukkit.entity.Player;
 import org.kalbinvv.carryon.CarryOn;
 import org.kalbinvv.carryon.protections.Protection;
 
 import com.sk89q.worldedit.util.Location;
-import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -28,7 +28,8 @@ public class WorldGuardProtection implements Protection{
 	@Override
 	public boolean check(Player player, Entity entity) {
 		if(!WorldGuardFlag.isRegistered()) {
-			CarryOn.getPluginLogger().warning("WorldGuard flag is not registered, "
+			CarryOn.getPlugin().getLogger().warning(
+					"WorldGuard flag is not registered, "
 					+ "can't check protection!");
 			return true;
 		}
@@ -37,10 +38,12 @@ public class WorldGuardProtection implements Protection{
 
 		RegionContainer container = worldGuard.getPlatform().getRegionContainer();
 		
-		World world = localPlayer.getWorld();
-		
-		Location location = new Location(world, entity.getLocation().getX(),
-				entity.getLocation().getY(), entity.getLocation().getZ());
+		Location location = new Location(
+				localPlayer.getWorld(), 
+				entity.getLocation().getX(),
+				entity.getLocation().getY(), 
+				entity.getLocation().getZ()
+				);
 
 		RegionQuery query = container.createQuery();
 

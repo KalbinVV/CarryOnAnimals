@@ -10,7 +10,8 @@ import org.bukkit.command.TabCompleter;
 public class CarryOnAnimalsTabCompleter implements TabCompleter{
 
 	@Override
-	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+	public List<String> onTabComplete(CommandSender sender, Command command, 
+			String alias, String[] args) {
 		return Arrays.asList("help", "protections", "reload");
 	}
 

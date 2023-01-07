@@ -27,15 +27,18 @@ public class CarryEvent implements Listener{
 		}
 
 		Entity entity = event.getRightClicked();
-
 		Player player = event.getPlayer();
+
+		if(!player.isSneaking()) {
+			return;
+		}
 
 		Configuration configuration = CarryOn.getConfiguration();
 
 		String prefix = configuration.getString("prefix");
 
-		if(!ConfigurationUtils.initAllowedEntitiesTypes(CarryOn
-				.getConfiguration()).contains(entity.getType())) {
+		if(!ConfigurationUtils.initAllowedEntitiesTypes(configuration)
+				.contains(entity.getType())) {
 			String message = configuration.getString("invalidEntityMessage");
 
 			Bukkit.getScheduler().runTaskLaterAsynchronously(CarryOn.getPlugin(),
@@ -43,10 +46,6 @@ public class CarryEvent implements Listener{
 						ChatUtils.sendMessage(prefix, message, player);
 					}, 2l);
 
-			return;
-		}
-
-		if(!player.isSneaking()) {
 			return;
 		}
 
@@ -59,7 +58,7 @@ public class CarryEvent implements Listener{
 					}, 2l);
 			return;
 		}
-		
+
 		ProtectionsList protectionsList = CarryOn.getProtectionsList();
 
 		if(!protectionsList.checkAll(player, entity)) {
@@ -80,7 +79,8 @@ public class CarryEvent implements Listener{
 		}
 
 		if(ConfigurationUtils.isParticleRegistered()) {
-			ParticlesUtils.spawnParticle(ConfigurationUtils.getParticle(), 
+			ParticlesUtils.spawnParticle(
+					ConfigurationUtils.getParticle(), 
 					entity.getLocation(),
 					ConfigurationUtils.getParticleCount());
 		}
@@ -104,7 +104,8 @@ public class CarryEvent implements Listener{
 				}
 
 				if(ConfigurationUtils.isParticleRegistered()) {
-					ParticlesUtils.spawnParticle(ConfigurationUtils.getParticle(), 
+					ParticlesUtils.spawnParticle(
+							ConfigurationUtils.getParticle(), 
 							player.getLocation(),
 							ConfigurationUtils.getParticleCount());
 				}

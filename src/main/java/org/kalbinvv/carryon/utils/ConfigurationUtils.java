@@ -35,7 +35,7 @@ public class ConfigurationUtils{
 
 		List<String> allowedEntitiesTypesList = configuration.getStringList("allowedEntities");
 
-		Logger logger = CarryOn.getPluginLogger();
+		Logger logger = CarryOn.getPlugin().getLogger();
 
 		for(String entityTypeName : allowedEntitiesTypesList) {
 			EntityType entityType = EntityType.valueOf(entityTypeName.toUpperCase());
@@ -64,7 +64,7 @@ public class ConfigurationUtils{
 		
 		String particleName = configuration.getString("particles.type");
 
-		Logger logger = CarryOn.getPluginLogger();
+		Logger logger = CarryOn.getPlugin().getLogger();
 
 		try {
 			particle = Particle.valueOf(particleName.toUpperCase());

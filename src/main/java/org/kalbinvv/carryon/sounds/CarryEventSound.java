@@ -29,7 +29,7 @@ public abstract class CarryEventSound implements CarrySound {
 		String soundName = configuration.getString(String.format("sounds"
 				+ ".%s.name", getName()));
 		
-		Logger logger = CarryOn.getPluginLogger();
+		Logger logger = CarryOn.getPlugin().getLogger();
 		
 		try {
 			sound = Sound.valueOf(soundName.toUpperCase());
