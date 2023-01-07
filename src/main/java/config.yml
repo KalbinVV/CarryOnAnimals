@@ -1,0 +1,62 @@
+# Version of plugin, dont change them, it need to updates.
+version: 1.3
+
+# Enable message that thrown when player try avoid protection or dont have permission.
+messagesEnabled: true
+
+prefix: §6[CarryOnAnimals]
+
+# Protections list
+protections:
+    # Enable or disable all protections
+    enabled: true
+    # Towny plugin
+    towny:
+        enabled: true
+        # Message when player trying to avoid protection
+        message: §cYou cant do this!
+    # WorldGuard plugin [Experimental]
+    worldguard:
+        enabled: false
+        # Message when player trying to avoid protection
+        message: §cYou cant do this!
+
+# Message if player dont have carryonanimals.default permission
+permissionMessage: §cYou cant do this!
+
+allowedEntities:
+    - Sheep
+    - Chicken
+    - Cow
+    - Pig
+    - Wolf
+
+# Message if player try to pickup entity that is not in allowed entities list. Empty string - dont send any message
+invalidEntityMessage: ''
+
+helpMessage: |-
+    §aHelp:
+    §e/carryonanimals help - §fShow help
+    §e/carryonanimals reload - §fReload plugin
+    §e/carryonanimals protections - §fShow enabled protections
+
+reloadMessage: §aPlugin was reloaded!
+
+protectionsMessage: '§eEnabled protections: §a'
+
+sounds:
+    onPickUp:
+        enabled: true
+        name: BLOCK_ANVIL_BREAK
+        volume: 4
+        pitch: 0.5
+    onPlace:
+        enabled: true
+        name: BLOCK_ANVIL_FALL
+        volume: 4
+        pitch: 0.5
+
+particles:
+    enabled: true
+    type: Cloud
+    count: 10
