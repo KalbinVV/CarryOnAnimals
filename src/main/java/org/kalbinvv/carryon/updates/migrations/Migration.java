@@ -1,6 +1,7 @@
 package org.kalbinvv.carryon.updates.migrations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,9 @@ public abstract class Migration {
 	
 	public abstract Double getVersionOfMigration();
 	
-	protected abstract Map<String, Object> getConfigurationChanges();
+	protected Map<String, Object> getConfigurationChanges(){
+		return new HashMap<String, Object>();
+	}
 	
 	protected List<String> getPathsToRemove() {
 		return new ArrayList<String>();
@@ -40,6 +43,8 @@ public abstract class Migration {
 			migration = new MigrationTo12Version();
 		}else if(currentPluginVersion.equals(1.2)) {
 			migration = new MigrationTo13Version();
+		}else if(currentPluginVersion.equals(1.3)) {
+			migration = new MigrationTo14Version();
 		}
 		
 		return migration;

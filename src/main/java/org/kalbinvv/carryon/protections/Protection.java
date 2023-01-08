@@ -74,7 +74,7 @@ public interface Protection {
 		TownyAPI townyApi = TownyAPI.getInstance();
 
 		CarryOn.getProtectionsList()
-		       .addProtection(new TownyProtection(townyApi));
+				.addProtection(new TownyProtection(townyApi));
 	}
 
 	private static void registerWorldGuardProtection() {
@@ -82,7 +82,7 @@ public interface Protection {
 		WorldGuardPlugin worldGuardPlugin = WorldGuardPlugin.inst();
 
 		CarryOn.getProtectionsList()
-			   .addProtection(new WorldGuardProtection(worldGuard, worldGuardPlugin));
+				.addProtection(new WorldGuardProtection(worldGuard, worldGuardPlugin));
 	}
 
 }

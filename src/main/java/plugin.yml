@@ -1,6 +1,6 @@
 main: org.kalbinvv.carryon.CarryOn
 name: CarryOnAnimals
-version: '1.3'
+version: '1.4'
 api-version: 1.16
 description: Adds the ability to move animals on the head.
 softdepend: [Towny, WorldGuard, bStats]
@@ -9,3 +9,13 @@ commands:
         description: Main plugin command.
         usage: /carryonanimals
         aliases: [coa]
+permissions:
+    carryonanimals.default:
+        description: Default permission to entities carry.
+        default: true
+    carryonanimals.bypass:
+        description: Ignore protections.
+        default: op
+    carryonanimals.admin:
+        description: For reload and protections command.
+        default: op

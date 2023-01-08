@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kalbinvv.carryon.commands.CarryOnAnimalsCommand;
 import org.kalbinvv.carryon.commands.CarryOnAnimalsTabCompleter;
@@ -24,7 +24,7 @@ import org.kalbinvv.carryon.utils.ConfigurationUtils;
 
 public class CarryOn extends JavaPlugin{
 
-	private static Plugin plugin;
+	private static JavaPlugin plugin;
 	private static FileConfiguration configuration;
 	private static ProtectionsList protectionsList;
 
@@ -32,12 +32,27 @@ public class CarryOn extends JavaPlugin{
 	public void onEnable() {
 		plugin = this;
 
-		saveDefaultConfig();
-		configuration = getConfig();
+		File configurationFile = new File(getDataFolder(), "config.yml");
+
+		if(configurationFile.exists()) {
+			configuration = new YamlConfiguration();
+			try {
+				configuration.load(configurationFile);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InvalidConfigurationException e) {
+				e.printStackTrace();
+			}
+		}else {
+			saveDefaultConfig();
+			configuration = getConfig();
+		}
 
 		PluginUpdater pluginUpdater = new PluginUpdater();
 		pluginUpdater.update(configuration);
-		
+
 		if(pluginUpdater.isPluginWasUpdated()) {
 			getLogger().info(String.format(
 					"Plugin was updated to %s!",
@@ -47,16 +62,19 @@ public class CarryOn extends JavaPlugin{
 					"Current version of plugin: %s",
 					pluginUpdater.getCurrentPluginVersion()));
 		}
+		
 
 		loadConfiguration(false);
 
-		enableMetrics();
+		Utils.enableMetrics();
 
-		getServer().getPluginManager().registerEvents(
+		final PluginManager pluginManager = getServer().getPluginManager();
+
+		pluginManager.registerEvents(
 				new CarryEvent(), 
 				getPlugin());
 
-		getServer().getPluginManager().registerEvents(
+		pluginManager.registerEvents(
 				new QuitEvent(), 
 				getPlugin());
 
@@ -106,44 +124,6 @@ public class CarryOn extends JavaPlugin{
 		Protection.registerProtections();
 	}
 
-	private void enableMetrics() {
-		try {
-			int pluginId = 17282;
-			Metrics metrics = new Metrics(this, pluginId);
-
-			metrics.addCustomChart(new Metrics.SimplePie(
-					"used_protections", 
-					() -> {
-						return protectionsList.getStringOfEnabledProtections();
-					}));
-
-			metrics.addCustomChart(new Metrics.SimplePie(
-					"particles", 
-					() -> {
-						return ConfigurationUtils.isParticleRegistered() 
-								? "Enabled" : "Disabled";
-					}));
-
-			metrics.addCustomChart(new Metrics.SimplePie(
-					"the_sound_of_picking", 
-					() -> {
-						return SoundsUtils.getPickUpSound().isRegistered() 
-								? "Enabled" : "Disabled";
-					}));
-
-			metrics.addCustomChart(new Metrics.SimplePie(
-					"the_sound_of_placing", 
-					() -> {
-						return SoundsUtils.getPlaceSound().isRegistered() 
-								? "Enabled" : "Disabled";
-					}));
-
-			getLogger().info("Metrics enabled!");
-		} catch(Exception e) {
-			getLogger().warning("Can't enable metrics!");
-		}
-	}
-
 	@Override
 	public void onDisable() {
 		getLogger().info("Plugin disabled!");
@@ -153,7 +133,7 @@ public class CarryOn extends JavaPlugin{
 		return configuration;
 	}
 
-	public static Plugin getPlugin() {
+	public static JavaPlugin getPlugin() {
 		return plugin;
 	}
 
