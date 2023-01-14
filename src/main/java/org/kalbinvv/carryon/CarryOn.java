@@ -94,7 +94,7 @@ public class CarryOn extends JavaPlugin{
 			if(WorldGuardFlag.isRegistered()) {
 				getLogger().info(String.format(
 						"WorldGuard flag '%s' is registered!", 
-						WorldGuardFlag.FlagName));
+						WorldGuardFlag.FLAG_NAME));
 			}
 		}
 	}

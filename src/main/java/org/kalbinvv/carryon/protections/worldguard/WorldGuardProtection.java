@@ -14,8 +14,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 
 public class WorldGuardProtection implements Protection{
-
-
+	
 	private final WorldGuard worldGuard;
 	private final WorldGuardPlugin worldGuardPlugin;
 

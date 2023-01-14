@@ -12,7 +12,7 @@ public class MigrationTo18Version extends Migration{
 	}
 	
 	@Override
-	public Map<String, Object> getConfigurationChanges() {
+	protected Map<String, Object> getConfigurationChanges() {
 		var configurationChanges = new HashMap<String, Object>();
 		
 		configurationChanges.put(

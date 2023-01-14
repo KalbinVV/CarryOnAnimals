@@ -16,7 +16,7 @@ public class MigrationTo15Version extends Migration{
 	}
 	
 	@Override
-	public Map<String, Object> getConfigurationChanges() {
+	protected Map<String, Object> getConfigurationChanges() {
 		var configurationChanges = new HashMap<String, Object>();
 		
 		// Reconstruct messages configuration

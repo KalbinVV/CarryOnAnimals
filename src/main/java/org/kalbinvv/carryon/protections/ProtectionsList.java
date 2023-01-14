@@ -23,7 +23,6 @@ public class ProtectionsList {
 	}
 
 	public boolean checkAll(Player player, Entity entity) {
-
 		if(player.hasPermission("carryonanimals.bypass")) {
 			return true;
 		}
