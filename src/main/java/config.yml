@@ -1,10 +1,22 @@
 # Version of plugin, dont change them, it need to updates.
-version: 1.4
+version: 1.8
 
-# Enable message that thrown when player try avoid protection or dont have permission.
-messagesEnabled: true
-
-prefix: §6[CarryOnAnimals]
+messages:
+    # Enable message that thrown when player try avoid protection or dont have permission.
+    enabled: true
+    prefix: §6[CarryOnAnimals]
+    # Message if player dont have carryonanimals.default permission
+    permission: §cYou cant do this!
+    # Message if player try to pickup entity that is not in allowed entities list. Empty string - dont send any message
+    invalidEntity: ''
+    reload: §aPlugin was reloaded!
+    protections: '§eEnabled protections: §a'
+    notEnabledWorld: §cThis world is not enabled!
+    help: |-
+        §aHelp:
+        §e/carryonanimals help - §fShow help
+        §e/carryonanimals reload - §fReload plugin
+        §e/carryonanimals protections - §fShow enabled protections
 
 # Protections list
 protections:
@@ -15,14 +27,17 @@ protections:
         enabled: true
         # Message when player trying to avoid protection
         message: §cYou cant do this!
+        # Allow allies to carry on animals
+        allowAlliance: false
+        # Allow players where in one nation with you to carry on animals
+        allowNation: false
+        # Only king can carry on animals (Work only if allowNation is enabled)
+        onlyKing: false
     # WorldGuard plugin [Experimental]
     worldguard:
         enabled: false
         # Message when player trying to avoid protection
         message: §cYou cant do this!
-
-# Message if player dont have carryonanimals.default permission
-permissionMessage: §cYou cant do this!
 
 allowedEntities:
     - Sheep
@@ -30,19 +45,6 @@ allowedEntities:
     - Cow
     - Pig
     - Wolf
-
-# Message if player try to pickup entity that is not in allowed entities list. Empty string - dont send any message
-invalidEntityMessage: ''
-
-helpMessage: |-
-    §aHelp:
-    §e/carryonanimals help - §fShow help
-    §e/carryonanimals reload - §fReload plugin
-    §e/carryonanimals protections - §fShow enabled protections
-
-reloadMessage: §aPlugin was reloaded!
-
-protectionsMessage: '§eEnabled protections: §a'
 
 sounds:
     onPickUp:
@@ -60,3 +62,7 @@ particles:
     enabled: true
     type: Cloud
     count: 10
+
+# Worlds names where plugin will work
+worlds:
+    - world

@@ -9,9 +9,9 @@ import org.kalbinvv.carryon.updates.migrations.Migration;
 
 public class PluginUpdater {
 
-	private static final Double LAST_PLUGIN_VERSION = 1.4;
+	private static final Double LAST_PLUGIN_VERSION = 1.8;
 	private static final String CONFIGURATION_FILE_NAME = "config.yml";
-	
+
 	private boolean pluginWasUpdated = false;
 	private Double currentPluginVersion = 1.0;
 
@@ -22,7 +22,7 @@ public class PluginUpdater {
 		}
 
 		if(currentPluginVersion < LAST_PLUGIN_VERSION) {
-			Migration migration = Migration.getRequiredMigration(getCurrentPluginVersion());
+			var migration = Migration.getRequiredMigration(currentPluginVersion);
 
 			migration.migrate(configuration);
 
@@ -33,10 +33,10 @@ public class PluginUpdater {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			pluginWasUpdated = true;
 			currentPluginVersion = migration.getVersionOfMigration();
-			
+
 			if(currentPluginVersion < LAST_PLUGIN_VERSION) {
 				update(configuration);
 			}

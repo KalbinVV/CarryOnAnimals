@@ -3,8 +3,10 @@ package org.kalbinvv.carryon;
 import java.io.File;
 
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -114,12 +116,13 @@ public class CarryOn extends JavaPlugin{
 			}
 		}
 
-		ConfigurationUtils.initAllowedEntitiesTypes(configuration);
+		ConfigurationUtils.loadWorldsFromConfiguration(configuration);
+		ConfigurationUtils.loadAllowedEntitiesTypes(configuration);
 		ConfigurationUtils.loadParticleFromConfiguration(configuration);
-
+		
 		SoundsUtils.loadSounds(configuration);
 
-		ChatUtils.setMessagesEnabled(configuration.getBoolean("messagesEnabled"));
+		ChatUtils.setMessagesEnabled(configuration.getBoolean("messages.enabled"));
 
 		Protection.registerProtections();
 	}

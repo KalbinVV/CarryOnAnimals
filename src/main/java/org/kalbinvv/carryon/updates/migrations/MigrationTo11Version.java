@@ -13,11 +13,6 @@ public class MigrationTo11Version extends Migration{
 	public Double getVersionOfMigration() {
 		return 1.1;
 	}
-	
-	@Override
-	protected List<String> getPathsToRemove() {
-		return Arrays.asList("canCarryPlayers");
-	}
 
 	@Override
 	protected Map<String, Object> getConfigurationChanges() {
@@ -34,6 +29,11 @@ public class MigrationTo11Version extends Migration{
 				"");
 		
 		return configurationChanges;
+	}
+	
+	@Override
+	protected List<String> getPathsToRemove() {
+		return Arrays.asList("canCarryPlayers");
 	}
 
 }

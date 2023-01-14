@@ -10,6 +10,7 @@ import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import org.kalbinvv.carryon.CarryOn;
 import org.kalbinvv.carryon.utils.ChatUtils;
+import org.kalbinvv.carryon.utils.MessageType;
 
 public class CarryOnAnimalsCommand implements CommandExecutor{
 
@@ -35,17 +36,18 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 	private void helpSubcommand(CommandSender sender) {
 		Configuration configuration = CarryOn.getConfiguration();
 
-		String helpMessage = configuration.getString("helpMessage");
+		String helpMessage = configuration.getString("messages.help");
 
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
 
-			String prefix = configuration.getString("prefix");
+			String prefix = configuration.getString("messages.prefix");
 
 			ChatUtils.sendMessage(
 					prefix, 
 					helpMessage, 
-					player);
+					player,
+					MessageType.CommandResponse);
 		}else {
 			Logger logger = CarryOn.getPlugin().getLogger();
 			logger.info(
@@ -59,25 +61,27 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 
 		boolean hasPermission = true;
 
-		String reloadMessage = configuration.getString("reloadMessage");
+		String reloadMessage = configuration.getString("messages.reload");
 
 		if(sender instanceof Player) {
 			Player player = (Player) sender;
 
 			hasPermission = player.hasPermission("carryonanimals.admin");
 
-			String prefix = configuration.getString("prefix");
+			String prefix = configuration.getString("messages.prefix");
 
 			if(hasPermission) {
 				ChatUtils.sendMessage(
 						prefix, 
 						reloadMessage, 
-						player);
+						player,
+						MessageType.CommandResponse);
 			}else {
 				ChatUtils.sendMessage(
 						prefix, 
-						configuration.getString("permissionMessage"), 
-						player);
+						configuration.getString("messages.permission"), 
+						player,
+						MessageType.CommandResponse);
 			}
 		}else {
 			CarryOn.getPlugin().getLogger().info(
@@ -95,7 +99,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 		boolean hasPermission = true;
 
 		String protectionsMessage = String.format("%s%s", 
-				configuration.getString("protectionsMessage"), CarryOn
+				configuration.getString("messages.protections"), CarryOn
 				.getProtectionsList().getStringOfEnabledProtections());
 
 		if(sender instanceof Player) {
@@ -103,18 +107,20 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 
 			hasPermission = player.hasPermission("carryonanimals.admin");
 
-			String prefix = configuration.getString("prefix");
+			String prefix = configuration.getString("messages.prefix");
 
 			if(hasPermission) {
 				ChatUtils.sendMessage(
 						prefix, 
 						protectionsMessage, 
-						player);
+						player,
+						MessageType.CommandResponse);
 			}else {
 				ChatUtils.sendMessage(
 						prefix, 
-						configuration.getString("permissionMessage"), 
-						player);
+						configuration.getString("messages.permission"), 
+						player,
+						MessageType.CommandResponse);
 			}
 		}else {
 			CarryOn.getPlugin().getLogger().info(

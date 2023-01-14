@@ -16,6 +16,7 @@ import org.kalbinvv.carryon.sounds.CarrySound;
 import org.kalbinvv.carryon.sounds.SoundsUtils;
 import org.kalbinvv.carryon.utils.ChatUtils;
 import org.kalbinvv.carryon.utils.ConfigurationUtils;
+import org.kalbinvv.carryon.utils.MessageType;
 import org.kalbinvv.carryon.utils.ParticlesUtils;
 
 public class CarryEvent implements Listener{
@@ -29,32 +30,56 @@ public class CarryEvent implements Listener{
 		Entity entity = event.getRightClicked();
 		Player player = event.getPlayer();
 
+		Configuration configuration = CarryOn.getConfiguration();
+
+		String prefix = configuration.getString("messages.prefix");
+
+		
+		if(!ConfigurationUtils.isWorldEnabled(player.getWorld())) {
+			String message = configuration.getString("messages.notEnabledWorld");
+			
+			Bukkit.getScheduler().runTaskLaterAsynchronously(CarryOn.getPlugin(),
+					() -> {
+						ChatUtils.sendMessage(
+								prefix, 
+								message, 
+								player,
+								MessageType.Event);
+					}, 2l);
+			
+			return;
+		}
+		
 		if(!player.isSneaking()) {
 			return;
 		}
-
-		Configuration configuration = CarryOn.getConfiguration();
-
-		String prefix = configuration.getString("prefix");
-
+		
 		if(!ConfigurationUtils.initAllowedEntitiesTypes(configuration)
 				.contains(entity.getType())) {
-			String message = configuration.getString("invalidEntityMessage");
+			String message = configuration.getString("messages.invalidEntity");
 
 			Bukkit.getScheduler().runTaskLaterAsynchronously(CarryOn.getPlugin(),
 					() -> {
-						ChatUtils.sendMessage(prefix, message, player);
+						ChatUtils.sendMessage(
+								prefix, 
+								message, 
+								player,
+								MessageType.Event);
 					}, 2l);
 
 			return;
 		}
 
 		if(!player.hasPermission("carryonanimals.default")) {
-			String message = configuration.getString("permissionMessage");
+			String message = configuration.getString("messages.permission");
 
 			Bukkit.getScheduler().runTaskLaterAsynchronously(CarryOn.getPlugin(),
 					() -> {
-						ChatUtils.sendMessage(prefix, message, player);
+						ChatUtils.sendMessage(
+								prefix, 
+								message, 
+								player,
+								MessageType.Event);
 					}, 2l);
 			return;
 		}
@@ -66,7 +91,11 @@ public class CarryEvent implements Listener{
 
 			Bukkit.getScheduler().runTaskLaterAsynchronously(CarryOn.getPlugin(),
 					() -> {
-						ChatUtils.sendMessage(prefix, message, player);
+						ChatUtils.sendMessage(
+								prefix, 
+								message, 
+								player,
+								MessageType.Event);
 					}, 2l);
 
 			return;

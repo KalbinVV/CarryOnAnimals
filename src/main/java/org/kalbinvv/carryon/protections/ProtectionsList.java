@@ -1,6 +1,6 @@
 package org.kalbinvv.carryon.protections;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.bukkit.entity.Entity;
@@ -8,24 +8,18 @@ import org.bukkit.entity.Player;
 
 public class ProtectionsList {
 
-	private final List<Protection> protections = new ArrayList<Protection>();
+	private final List<Protection> protections = new LinkedList<Protection>();
 	private String message;
-	private String stringOfEnabledProtections;
+	private String stringOfEnabledProtections = "";
 
 	public void addProtection(Protection protection) {
 		protections.add(protection);
 
-		StringBuilder stringBuilder = new StringBuilder();
-
-		for(int i = 0; i < protections.size(); i++) {
-			stringBuilder.append(protections.get(i).getName());
-
-			if(i != protections.size() - 1) {
-				stringBuilder.append(", ");
-			}
+		if(!stringOfEnabledProtections.isEmpty()) {
+			stringOfEnabledProtections += ", ";
 		}
-
-		stringOfEnabledProtections = stringBuilder.toString();
+		
+		stringOfEnabledProtections += protection.getName();
 	}
 
 	public boolean checkAll(Player player, Entity entity) {
