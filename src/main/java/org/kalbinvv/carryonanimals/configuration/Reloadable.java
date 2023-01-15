@@ -1,4 +1,4 @@
-package org.kalbinvv.carryonanimals;
+package org.kalbinvv.carryonanimals.configuration;
 
 public interface Reloadable {
 

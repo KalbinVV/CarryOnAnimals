@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.kalbinvv.carryonanimals.configuration.Reloadable;
 
 // Singleton pattern
-public class ProtectionsList {
+public class ProtectionsList implements Reloadable{
 
 	private static ProtectionsList protectionsListPtr = null;
 	
@@ -20,16 +21,19 @@ public class ProtectionsList {
 	}
 	
 	public static ProtectionsList init() {
-		if(protectionsListPtr != null) {
+		if(protectionsListPtr == null) {
 			protectionsListPtr = new ProtectionsList();
 		}
 		
 		return protectionsListPtr;
 	}
 	
-	// Set protections list pointer to null to make it reload.
-	public static void clear() {
+	@Override
+	public void reload() {
+		// Set protections list pointer to null to make it reload.
 		protectionsListPtr = null;
+		
+		init();
 	}
 	
 	public void addProtection(Protection protection) {

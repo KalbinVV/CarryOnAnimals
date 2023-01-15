@@ -1,6 +1,7 @@
-package org.kalbinvv.carryonanimals;
+package org.kalbinvv.carryonanimals.configuration;
 
 import java.io.File;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,27 +18,22 @@ import org.kalbinvv.carryonanimals.utils.ConfigurationUtils;
 Modified configuration class with reload function
 and save memory	via hash map.
 */
-public class PluginConfiguration extends YamlConfiguration implements Reloadable {
+public class PluginConfiguration extends YamlConfiguration 
+implements Reloadable, Loadable {
 
 	private final Map<String, Object> savedData = new HashMap<String, Object>();
 	private final File configurationFile;
 
 	public PluginConfiguration(String configurationFilePath) {
 		this.configurationFile = new File(configurationFilePath);
-		
-		reload();
 	}
-	
+
 	public PluginConfiguration(File file) {
 		this.configurationFile = file;
-		
-		reload();
 	}
-	
+
 	@Override
-	public void reload() {
-		clearSavedData();
-		
+	public void load() {
 		var configuration = YamlConfiguration.loadConfiguration(configurationFile);
 
 		try {
@@ -45,22 +41,26 @@ public class PluginConfiguration extends YamlConfiguration implements Reloadable
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
-		
-		ProtectionsList.clear();
-		ProtectionsList.init();
-		
+
+		ProtectionsList.init().reload();
+
 		ConfigurationUtils.loadWorldsFromConfiguration(configuration);
 		ConfigurationUtils.loadAllowedEntitiesTypes(configuration);
 		ConfigurationUtils.loadParticleFromConfiguration(configuration);
-		
+
 		SoundsUtils.loadSounds(configuration);
 
 		ChatUtils.setMessagesEnabled(configuration.getBoolean("messages.enabled"));
 
 		Protection.registerProtections();
-		
 	}
-	
+
+	@Override
+	public void reload() {
+		clearSavedData();
+		load();
+	}
+
 	public void clearSavedData() {
 		savedData.clear();
 	}
@@ -68,7 +68,6 @@ public class PluginConfiguration extends YamlConfiguration implements Reloadable
 	@Override
 	public String getString(String path) {
 		if(savedData.containsKey(path)) {
-			CarryOnAnimals.getPlugin().getLogger().info("From saved story!");
 			return (String) savedData.get(path);
 		}
 
@@ -78,30 +77,30 @@ public class PluginConfiguration extends YamlConfiguration implements Reloadable
 
 		return value;
 	}
-	
+
 	@Override
 	public boolean getBoolean(String path) {
 		if(savedData.containsKey(path)) {
 			return (boolean) savedData.get(path);
 		}
-		
+
 		boolean value = super.getBoolean(path);
-		
+
 		savedData.put(path, value);
-		
+
 		return value;
 	}
-	
+
 	@Override
 	public double getDouble(String path) {
 		if(savedData.containsKey(path)) {
 			return (double) savedData.get(path);
 		}
-		
+
 		double value = super.getDouble(path);
-		
+
 		savedData.put(path, value);
-		
+
 		return value;
 	}
 

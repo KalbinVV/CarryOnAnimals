@@ -1,10 +1,13 @@
 package org.kalbinvv.carryonanimals;
 
+import java.io.File;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kalbinvv.carryonanimals.commands.CarryOnAnimalsCommand;
 import org.kalbinvv.carryonanimals.commands.CarryOnAnimalsTabCompleter;
+import org.kalbinvv.carryonanimals.configuration.PluginConfiguration;
 import org.kalbinvv.carryonanimals.events.CarryEvent;
 import org.kalbinvv.carryonanimals.events.QuitEvent;
 import org.kalbinvv.carryonanimals.protections.worldguard.WorldGuardFlag;
@@ -21,7 +24,10 @@ public class CarryOnAnimals extends JavaPlugin{
 
 		saveDefaultConfig();
 		
-		configuration = new PluginConfiguration(getDataFolder() + "config.yml");
+		configuration = new PluginConfiguration(
+				getDataFolder() + File.separator + "config.yml"
+		);
+		configuration.load();
 
 		PluginUpdater pluginUpdater = new PluginUpdater();
 		pluginUpdater.update(configuration);
@@ -30,13 +36,9 @@ public class CarryOnAnimals extends JavaPlugin{
 			getLogger().info(String.format(
 					"Plugin was updated to %s!",
 					pluginUpdater.getCurrentPluginVersion()));
-		}else {
-			getLogger().info(String.format(
-					"Current version of plugin: %s",
-					pluginUpdater.getCurrentPluginVersion()));
+			
+			configuration.load();
 		}
-		
-		configuration.reload();
 
 		Utils.enableMetrics();
 

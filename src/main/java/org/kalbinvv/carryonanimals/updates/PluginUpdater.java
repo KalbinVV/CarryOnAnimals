@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.kalbinvv.carryonanimals.CarryOnAnimals;
+import org.kalbinvv.carryonanimals.configuration.PluginConfiguration;
 import org.kalbinvv.carryonanimals.updates.migrations.Migration;
 
 public class PluginUpdater {
@@ -31,6 +32,9 @@ public class PluginUpdater {
 				configuration.save(new File(
 						CarryOnAnimals.getPlugin().getDataFolder(), 
 						CONFIGURATION_FILE_NAME));
+				
+				// BugFix: last version was saved in map
+				((PluginConfiguration) configuration).clearSavedData();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
