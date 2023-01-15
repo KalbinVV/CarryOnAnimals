@@ -9,10 +9,10 @@ public class Utils {
 
 	public static void enableMetrics() {
 		int pluginId = 17282;
-		JavaPlugin plugin = CarryOn.getPlugin();
+		JavaPlugin plugin = CarryOnAnimals.getPlugin();
 		
 		try {
-			ProtectionsList protectionsList = CarryOn.getProtectionsList();
+			ProtectionsList protectionsList = CarryOnAnimals.getProtectionsList();
 			
 			Metrics metrics = new Metrics(plugin, pluginId);
 

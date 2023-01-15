@@ -24,7 +24,7 @@ import org.kalbinvv.carryonanimals.updates.PluginUpdater;
 import org.kalbinvv.carryonanimals.utils.ChatUtils;
 import org.kalbinvv.carryonanimals.utils.ConfigurationUtils;
 
-public class CarryOn extends JavaPlugin{
+public class CarryOnAnimals extends JavaPlugin{
 
 	private static JavaPlugin plugin;
 	private static FileConfiguration configuration;
@@ -101,7 +101,7 @@ public class CarryOn extends JavaPlugin{
 
 	public static void loadConfiguration(boolean shouldBeReloaded) {
 		if(shouldBeReloaded) {
-			File configurationFile = new File(CarryOn
+			File configurationFile = new File(CarryOnAnimals
 					.getPlugin().getDataFolder(), "config.yml");
 
 			configuration = new YamlConfiguration();
@@ -145,7 +145,7 @@ public class CarryOn extends JavaPlugin{
 	}
 
 	public static void setProtectionsList(ProtectionsList protectionsList) {
-		CarryOn.protectionsList = protectionsList;
+		CarryOnAnimals.protectionsList = protectionsList;
 	}
 
 }

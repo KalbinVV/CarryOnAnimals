@@ -1,6 +1,7 @@
 package org.kalbinvv.carryonanimals.utils;
 
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -12,7 +13,7 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.EntityType;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 
 public class ConfigurationUtils{
 
@@ -35,7 +36,7 @@ public class ConfigurationUtils{
 		List<String> allowedEntitiesTypesList = configuration
 				.getStringList("allowedEntities");
 
-		Logger logger = CarryOn.getPlugin().getLogger();
+		Logger logger = CarryOnAnimals.getPlugin().getLogger();
 
 		String allowedEntitiesTypesNames = "";
 
@@ -78,7 +79,7 @@ public class ConfigurationUtils{
 
 		String particleName = configuration.getString("particles.type");
 
-		Logger logger = CarryOn.getPlugin().getLogger();
+		Logger logger = CarryOnAnimals.getPlugin().getLogger();
 
 		try {
 			particle = Particle.valueOf(particleName.toUpperCase());
@@ -110,7 +111,7 @@ public class ConfigurationUtils{
 			worldsNames += world;
 		}
 
-		CarryOn.getPlugin().getLogger().info(
+		CarryOnAnimals.getPlugin().getLogger().info(
 				String.format(
 						"Enabled worlds: %s", 
 						worldsNames.isEmpty() ? "Nothing" : worldsNames)

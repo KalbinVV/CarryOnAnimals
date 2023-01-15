@@ -1,12 +1,13 @@
 package org.kalbinvv.carryonanimals.updates.migrations;
 
 import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.bukkit.configuration.Configuration;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 
 public class MigrationTo15Version extends Migration{
 
@@ -20,7 +21,7 @@ public class MigrationTo15Version extends Migration{
 		var configurationChanges = new HashMap<String, Object>();
 		
 		// Reconstruct messages configuration
-		Configuration configuration = CarryOn.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getConfiguration();
 		
 		configurationChanges.put(
 				"messages.enabled", 

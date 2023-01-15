@@ -1,10 +1,11 @@
 package org.kalbinvv.carryonanimals.protections;
 
 import org.bukkit.Location;
+
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.object.Nation;
@@ -17,7 +18,7 @@ public class TownyProtection implements Protection{
 	public TownyProtection(TownyAPI townyApi) {
 		this.townyApi = townyApi;
 	}
-
+	
 	@Override
 	public boolean check(Player player, Entity entity) {
 		Location location = entity.getLocation();
@@ -31,7 +32,7 @@ public class TownyProtection implements Protection{
 		if(townInEntityLocation.hasResident(player)) {
 			return true;
 		}else {
-			Configuration configuration = CarryOn.getConfiguration();
+			Configuration configuration = CarryOnAnimals.getConfiguration();
 
 			Town playerTown = townyApi.getTown(player);
 
@@ -70,7 +71,7 @@ public class TownyProtection implements Protection{
 
 	@Override
 	public String getMessage() {
-		return CarryOn.getConfiguration().getString("protections.towny.message");
+		return CarryOnAnimals.getConfiguration().getString("protections.towny.message");
 	}
 
 	@Override

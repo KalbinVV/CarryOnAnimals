@@ -2,12 +2,11 @@ package org.kalbinvv.carryonanimals.protections;
 
 import java.util.logging.Logger;
 
-
 import org.bukkit.Server;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 import org.kalbinvv.carryonanimals.protections.worldguard.WorldGuardProtection;
 
 import com.palmergames.bukkit.towny.TownyAPI;
@@ -21,11 +20,11 @@ public interface Protection {
 	public String getName();
 
 	public static void registerProtections() {
-		CarryOn.setProtectionsList(new ProtectionsList());
+		CarryOnAnimals.setProtectionsList(new ProtectionsList());
 
-		Logger logger = CarryOn.getPlugin().getLogger();
+		final Logger logger = CarryOnAnimals.getPlugin().getLogger();
 
-		Configuration configuration = CarryOn.getConfiguration();
+		final Configuration configuration = CarryOnAnimals.getConfiguration();
 
 		if(configuration.getBoolean("protections.enabled")) {
 			registerProtection("Towny", () -> {
@@ -41,14 +40,14 @@ public interface Protection {
 	}
 
 	private static void registerProtection(String name, Runnable registerRunnable) {
-		Configuration configuration = CarryOn.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getConfiguration();
 
 		boolean protectionEnabled = configuration.getBoolean(String.format(
 				"protections.%s.enabled", 
 				name.toLowerCase()));
 
-		Server server = CarryOn.getPlugin().getServer();
-		Logger logger = CarryOn.getPlugin().getLogger();
+		Server server = CarryOnAnimals.getPlugin().getServer();
+		Logger logger = CarryOnAnimals.getPlugin().getLogger();
 
 		if(server.getPluginManager().getPlugin(name) != null) {
 			if(protectionEnabled) {
@@ -73,16 +72,16 @@ public interface Protection {
 	private static void registerTownyProtection() {
 		TownyAPI townyApi = TownyAPI.getInstance();
 
-		CarryOn.getProtectionsList()
-				.addProtection(new TownyProtection(townyApi));
+		CarryOnAnimals.getProtectionsList()
+		.addProtection(new TownyProtection(townyApi));
 	}
 
 	private static void registerWorldGuardProtection() {
 		WorldGuard worldGuard = WorldGuard.getInstance();
 		WorldGuardPlugin worldGuardPlugin = WorldGuardPlugin.inst();
 
-		CarryOn.getProtectionsList()
-				.addProtection(new WorldGuardProtection(worldGuard, worldGuardPlugin));
+		CarryOnAnimals.getProtectionsList()
+		.addProtection(new WorldGuardProtection(worldGuard, worldGuardPlugin));
 	}
 
 }

@@ -3,12 +3,13 @@ package org.kalbinvv.carryonanimals.commands;
 
 import java.util.logging.Logger;
 
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 import org.kalbinvv.carryonanimals.utils.ChatUtils;
 import org.kalbinvv.carryonanimals.utils.MessageType;
 
@@ -34,7 +35,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 	}
 
 	private void helpSubcommand(CommandSender sender) {
-		Configuration configuration = CarryOn.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getConfiguration();
 
 		String helpMessage = configuration.getString("messages.help");
 
@@ -49,7 +50,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 					player,
 					MessageType.CommandResponse);
 		}else {
-			Logger logger = CarryOn.getPlugin().getLogger();
+			Logger logger = CarryOnAnimals.getPlugin().getLogger();
 			logger.info(
 					ChatUtils.removeAllColorsCodes(helpMessage));
 		}
@@ -57,7 +58,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 	}
 
 	private void reloadSubcommand(CommandSender sender) {
-		Configuration configuration = CarryOn.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getConfiguration();
 
 		boolean hasPermission = true;
 
@@ -84,22 +85,22 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 						MessageType.CommandResponse);
 			}
 		}else {
-			CarryOn.getPlugin().getLogger().info(
+			CarryOnAnimals.getPlugin().getLogger().info(
 					ChatUtils.removeAllColorsCodes(reloadMessage));
 		}
 
 		if(hasPermission) {
-			CarryOn.loadConfiguration(true);
+			CarryOnAnimals.loadConfiguration(true);
 		}
 	}
 
 	private void protectionsSubcommand(CommandSender sender) {
-		Configuration configuration = CarryOn.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getConfiguration();
 
 		boolean hasPermission = true;
 
 		String protectionsMessage = String.format("%s%s", 
-				configuration.getString("messages.protections"), CarryOn
+				configuration.getString("messages.protections"), CarryOnAnimals
 				.getProtectionsList().getStringOfEnabledProtections());
 
 		if(sender instanceof Player) {
@@ -123,7 +124,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 						MessageType.CommandResponse);
 			}
 		}else {
-			CarryOn.getPlugin().getLogger().info(
+			CarryOnAnimals.getPlugin().getLogger().info(
 					ChatUtils.removeAllColorsCodes(protectionsMessage));
 		}
 

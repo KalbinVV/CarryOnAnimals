@@ -3,7 +3,7 @@ package org.kalbinvv.carryonanimals.protections.worldguard;
 import org.bukkit.entity.Entity;
 
 import org.bukkit.entity.Player;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 import org.kalbinvv.carryonanimals.protections.Protection;
 
 import com.sk89q.worldedit.util.Location;
@@ -27,7 +27,7 @@ public class WorldGuardProtection implements Protection{
 	@Override
 	public boolean check(Player player, Entity entity) {
 		if(!WorldGuardFlag.isRegistered()) {
-			CarryOn.getPlugin().getLogger().warning(
+			CarryOnAnimals.getPlugin().getLogger().warning(
 					"WorldGuard flag is not registered, "
 					+ "can't check protection!");
 			return true;
@@ -55,7 +55,7 @@ public class WorldGuardProtection implements Protection{
 
 	@Override
 	public String getMessage() {
-		return CarryOn.getConfiguration().getString("protections.worldguard.message");
+		return CarryOnAnimals.getConfiguration().getString("protections.worldguard.message");
 	}
 
 	@Override

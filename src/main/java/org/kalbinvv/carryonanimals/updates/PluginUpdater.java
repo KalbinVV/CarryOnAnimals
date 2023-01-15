@@ -1,10 +1,11 @@
 package org.kalbinvv.carryonanimals.updates;
 
 import java.io.File;
+
 import java.io.IOException;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.kalbinvv.carryonanimals.CarryOn;
+import org.kalbinvv.carryonanimals.CarryOnAnimals;
 import org.kalbinvv.carryonanimals.updates.migrations.Migration;
 
 public class PluginUpdater {
@@ -28,7 +29,7 @@ public class PluginUpdater {
 
 			try {
 				configuration.save(new File(
-						CarryOn.getPlugin().getDataFolder(), 
+						CarryOnAnimals.getPlugin().getDataFolder(), 
 						CONFIGURATION_FILE_NAME));
 			} catch (IOException e) {
 				e.printStackTrace();
