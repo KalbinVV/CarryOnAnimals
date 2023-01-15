@@ -55,7 +55,7 @@ public class WorldGuardProtection implements Protection{
 
 	@Override
 	public String getMessage() {
-		return CarryOnAnimals.getConfiguration().getString("protections.worldguard.message");
+		return CarryOnAnimals.getPlugin().getConfig().getString("protections.worldguard.message");
 	}
 
 	@Override

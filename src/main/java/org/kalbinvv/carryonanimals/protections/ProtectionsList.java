@@ -6,12 +6,32 @@ import java.util.List;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+// Singleton pattern
 public class ProtectionsList {
 
-	private final List<Protection> protections = new LinkedList<Protection>();
+	private static ProtectionsList protectionsListPtr = null;
+	
+	private List<Protection> protections;
 	private String message;
 	private String stringOfEnabledProtections = "";
 
+	private ProtectionsList() {
+		protections = new LinkedList<Protection>();
+	}
+	
+	public static ProtectionsList init() {
+		if(protectionsListPtr != null) {
+			protectionsListPtr = new ProtectionsList();
+		}
+		
+		return protectionsListPtr;
+	}
+	
+	// Set protections list pointer to null to make it reload.
+	public static void clear() {
+		protectionsListPtr = null;
+	}
+	
 	public void addProtection(Protection protection) {
 		protections.add(protection);
 

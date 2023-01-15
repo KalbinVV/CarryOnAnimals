@@ -12,7 +12,7 @@ public class Utils {
 		JavaPlugin plugin = CarryOnAnimals.getPlugin();
 		
 		try {
-			ProtectionsList protectionsList = CarryOnAnimals.getProtectionsList();
+			ProtectionsList protectionsList = ProtectionsList.init();
 			
 			Metrics metrics = new Metrics(plugin, pluginId);
 

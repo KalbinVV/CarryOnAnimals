@@ -21,7 +21,7 @@ public class MigrationTo15Version extends Migration{
 		var configurationChanges = new HashMap<String, Object>();
 		
 		// Reconstruct messages configuration
-		Configuration configuration = CarryOnAnimals.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 		
 		configurationChanges.put(
 				"messages.enabled", 

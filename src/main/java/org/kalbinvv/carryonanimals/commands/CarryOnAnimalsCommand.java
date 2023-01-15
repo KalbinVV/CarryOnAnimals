@@ -1,8 +1,6 @@
 package org.kalbinvv.carryonanimals.commands;
 
-
 import java.util.logging.Logger;
-
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,6 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import org.kalbinvv.carryonanimals.CarryOnAnimals;
+import org.kalbinvv.carryonanimals.Reloadable;
+import org.kalbinvv.carryonanimals.protections.ProtectionsList;
 import org.kalbinvv.carryonanimals.utils.ChatUtils;
 import org.kalbinvv.carryonanimals.utils.MessageType;
 
@@ -35,7 +35,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 	}
 
 	private void helpSubcommand(CommandSender sender) {
-		Configuration configuration = CarryOnAnimals.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 		String helpMessage = configuration.getString("messages.help");
 
@@ -58,7 +58,7 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 	}
 
 	private void reloadSubcommand(CommandSender sender) {
-		Configuration configuration = CarryOnAnimals.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 		boolean hasPermission = true;
 
@@ -90,18 +90,18 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 		}
 
 		if(hasPermission) {
-			CarryOnAnimals.loadConfiguration(true);
+			((Reloadable) CarryOnAnimals.getPlugin().getConfig()).reload();
 		}
 	}
 
 	private void protectionsSubcommand(CommandSender sender) {
-		Configuration configuration = CarryOnAnimals.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 		boolean hasPermission = true;
 
 		String protectionsMessage = String.format("%s%s", 
-				configuration.getString("messages.protections"), CarryOnAnimals
-				.getProtectionsList().getStringOfEnabledProtections());
+				configuration.getString("messages.protections"), 
+				ProtectionsList.init().getStringOfEnabledProtections());
 
 		if(sender instanceof Player) {
 			Player player = (Player) sender;

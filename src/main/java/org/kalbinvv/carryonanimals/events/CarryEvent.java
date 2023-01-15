@@ -32,7 +32,7 @@ public class CarryEvent implements Listener{
 		Entity entity = event.getRightClicked();
 		Player player = event.getPlayer();
 
-		Configuration configuration = CarryOnAnimals.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 		String prefix = configuration.getString("messages.prefix");
 
@@ -87,7 +87,7 @@ public class CarryEvent implements Listener{
 			return;
 		}
 
-		ProtectionsList protectionsList = CarryOnAnimals.getProtectionsList();
+		ProtectionsList protectionsList = ProtectionsList.init();
 
 		if(!protectionsList.checkAll(player, entity)) {
 			String message = protectionsList.getMessage();

@@ -32,7 +32,7 @@ public class TownyProtection implements Protection{
 		if(townInEntityLocation.hasResident(player)) {
 			return true;
 		}else {
-			Configuration configuration = CarryOnAnimals.getConfiguration();
+			Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 			Town playerTown = townyApi.getTown(player);
 
@@ -71,7 +71,7 @@ public class TownyProtection implements Protection{
 
 	@Override
 	public String getMessage() {
-		return CarryOnAnimals.getConfiguration().getString("protections.towny.message");
+		return CarryOnAnimals.getPlugin().getConfig().getString("protections.towny.message");
 	}
 
 	@Override

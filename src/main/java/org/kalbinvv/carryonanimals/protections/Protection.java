@@ -20,11 +20,11 @@ public interface Protection {
 	public String getName();
 
 	public static void registerProtections() {
-		CarryOnAnimals.setProtectionsList(new ProtectionsList());
+		ProtectionsList.init();
 
 		final Logger logger = CarryOnAnimals.getPlugin().getLogger();
 
-		final Configuration configuration = CarryOnAnimals.getConfiguration();
+		final Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 		if(configuration.getBoolean("protections.enabled")) {
 			registerProtection("Towny", () -> {
@@ -40,7 +40,7 @@ public interface Protection {
 	}
 
 	private static void registerProtection(String name, Runnable registerRunnable) {
-		Configuration configuration = CarryOnAnimals.getConfiguration();
+		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
 		boolean protectionEnabled = configuration.getBoolean(String.format(
 				"protections.%s.enabled", 
@@ -72,7 +72,7 @@ public interface Protection {
 	private static void registerTownyProtection() {
 		TownyAPI townyApi = TownyAPI.getInstance();
 
-		CarryOnAnimals.getProtectionsList()
+		ProtectionsList.init()
 		.addProtection(new TownyProtection(townyApi));
 	}
 
@@ -80,7 +80,7 @@ public interface Protection {
 		WorldGuard worldGuard = WorldGuard.getInstance();
 		WorldGuardPlugin worldGuardPlugin = WorldGuardPlugin.inst();
 
-		CarryOnAnimals.getProtectionsList()
+		ProtectionsList.init()
 		.addProtection(new WorldGuardProtection(worldGuard, worldGuardPlugin));
 	}
 

@@ -9,12 +9,12 @@ import org.kalbinvv.carryonanimals.CarryOnAnimals;
 
 public abstract class CarryEventSound implements CarrySound {
 
-	public abstract String getName();
-	
 	private Sound sound;
 	private Float volume;
 	private Float pitch;
 	private boolean registered;
+	
+	public abstract String getName();
 
 	@Override
 	public void load(Configuration configuration) {
