@@ -1,5 +1,5 @@
 # Version of plugin, dont change them, it need to updates.
-version: 1.8
+version: 1.9
 
 messages:
     # Enable message that thrown when player try avoid protection or dont have permission.

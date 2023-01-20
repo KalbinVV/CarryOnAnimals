@@ -17,9 +17,8 @@ import org.kalbinvv.carryonanimals.utils.ConfigurationUtils;
 /*
 Modified configuration class with reload function
 and save memory	via hash map.
-*/
-public class PluginConfiguration extends YamlConfiguration 
-implements Reloadable, Loadable {
+ */
+public class PluginConfiguration extends YamlConfiguration implements Reloadable {
 
 	private final Map<String, Object> savedData = new HashMap<String, Object>();
 	private final File configurationFile;
@@ -32,8 +31,8 @@ implements Reloadable, Loadable {
 		this.configurationFile = file;
 	}
 
-	@Override
-	public void load() {
+	public void load(ConfigurationLoadType loadType) {
+
 		var configuration = YamlConfiguration.loadConfiguration(configurationFile);
 
 		try {
@@ -41,24 +40,27 @@ implements Reloadable, Loadable {
 		} catch (InvalidConfigurationException e) {
 			e.printStackTrace();
 		}
+		
+		if(loadType == ConfigurationLoadType.Modules) {
 
-		ProtectionsList.init().reload();
+			ProtectionsList.init().reload();
 
-		ConfigurationUtils.loadWorldsFromConfiguration(configuration);
-		ConfigurationUtils.loadAllowedEntitiesTypes(configuration);
-		ConfigurationUtils.loadParticleFromConfiguration(configuration);
+			ConfigurationUtils.loadWorldsFromConfiguration(configuration);
+			ConfigurationUtils.loadAllowedEntitiesTypes(configuration);
+			ConfigurationUtils.loadParticleFromConfiguration(configuration);
 
-		SoundsUtils.loadSounds(configuration);
+			SoundsUtils.loadSounds(configuration);
 
-		ChatUtils.setMessagesEnabled(configuration.getBoolean("messages.enabled"));
+			ChatUtils.setMessagesEnabled(configuration.getBoolean("messages.enabled"));
 
-		Protection.registerProtections();
+			Protection.registerProtections();
+		}
 	}
 
 	@Override
 	public void reload() {
 		clearSavedData();
-		load();
+		load(ConfigurationLoadType.Modules);
 	}
 
 	public void clearSavedData() {

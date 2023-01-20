@@ -7,11 +7,13 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kalbinvv.carryonanimals.commands.CarryOnAnimalsCommand;
 import org.kalbinvv.carryonanimals.commands.CarryOnAnimalsTabCompleter;
+import org.kalbinvv.carryonanimals.configuration.ConfigurationLoadType;
 import org.kalbinvv.carryonanimals.configuration.PluginConfiguration;
 import org.kalbinvv.carryonanimals.events.CarryEvent;
 import org.kalbinvv.carryonanimals.events.QuitEvent;
 import org.kalbinvv.carryonanimals.protections.worldguard.WorldGuardFlag;
 import org.kalbinvv.carryonanimals.updates.PluginUpdater;
+import org.kalbinvv.carryonanimals.updates.migrations.MigrationException;
 
 public class CarryOnAnimals extends JavaPlugin{
 
@@ -27,18 +29,23 @@ public class CarryOnAnimals extends JavaPlugin{
 		configuration = new PluginConfiguration(
 				getDataFolder() + File.separator + "config.yml"
 		);
-		configuration.load();
+		configuration.load(ConfigurationLoadType.Paths);
 
 		PluginUpdater pluginUpdater = new PluginUpdater();
-		pluginUpdater.update(configuration);
+		
+		try {
+			pluginUpdater.update(configuration);
+		} catch (MigrationException e) {
+			getLogger().warning(e.getMessage());
+		}
 
 		if(pluginUpdater.isPluginWasUpdated()) {
 			getLogger().info(String.format(
 					"Plugin was updated to %s!",
 					pluginUpdater.getCurrentPluginVersion()));
-			
-			configuration.load();
 		}
+		
+		configuration.load(ConfigurationLoadType.Modules);
 
 		Utils.enableMetrics();
 

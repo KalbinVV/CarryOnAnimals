@@ -8,16 +8,17 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.kalbinvv.carryonanimals.CarryOnAnimals;
 import org.kalbinvv.carryonanimals.configuration.PluginConfiguration;
 import org.kalbinvv.carryonanimals.updates.migrations.Migration;
+import org.kalbinvv.carryonanimals.updates.migrations.MigrationException;
 
 public class PluginUpdater {
 
-	private static final Double LAST_PLUGIN_VERSION = 1.8;
+	private static final Double LAST_PLUGIN_VERSION = 1.9;
 	private static final String CONFIGURATION_FILE_NAME = "config.yml";
 
 	private boolean pluginWasUpdated = false;
 	private Double currentPluginVersion = 1.0;
 
-	public void update(FileConfiguration configuration) {
+	public void update(FileConfiguration configuration) throws MigrationException {
 
 		if(configuration.contains(Migration.VERSION_PATH)) {
 			currentPluginVersion = configuration.getDouble(Migration.VERSION_PATH);
