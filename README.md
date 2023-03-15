@@ -50,7 +50,7 @@ protections - show list of enabled protections.
 
 reload - reload plugin.
 
-#Particles and sounds
+# Particles and sounds
 
 Plugin has particles and sounds support, you can configure this in config.yml file.
 
