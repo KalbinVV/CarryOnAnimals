@@ -5,16 +5,16 @@ Link: https://www.spigotmc.org/resources/carryonanimals-1-16-api-towny-worldguar
 
 Adds the ability to move animals (or another entities if you enabled it) on the head.
 
-#Screenshot:
+# Screenshot:
 https://imgur.com/a/NUJsSdJ
 
-#How it works?
+# How it works?
 
 To pick up an animal, you must crouch and right-click.
 
 To remove an animal from its head, you must crouch and stand.
 
-#Considers the protection of the following plugins:
+# Considers the protection of the following plugins:
 
 Towny (0.98.4.0 or new)
 
@@ -22,15 +22,15 @@ WorldGuard (7.0.0 or new) (Experimental)
 
 I don't know how regions work in WorldGuard to the end and therefore I couldn't fully check the functionality of the protection, if you find an error - let me know.
 
-#How does Towny protection work?
+# How does Towny protection work?
 
 Only players who are in the city where these animals are located can move animals. Other options may appear in the future.
 
-#How does WorldGuard protection work?
+# How does WorldGuard protection work?
 
 You can only move animals in a region where the "carry-on-animals" flag is set.
 
-#Permissions:
+# Permissions:
 
 The plugin has three permissions:
 
@@ -40,7 +40,7 @@ carryonanimals.bypass - ignore all protections (Towny, WorldGuard)
 
 carryonanimals.admin - to use protections and reload command.
 
-#Command
+# Command
 
 This plugin have command /carryonanimals (or just /coa):
 
@@ -54,14 +54,12 @@ reload - reload plugin.
 
 Plugin has particles and sounds support, you can configure this in config.yml file.
 
-#API usage:
+# API usage:
 
 
 The API currently has two events that can be tracked:
 
-
-EntityPickUpEvent
-
+## EntityPickUpEvent
 
 This event is called when player try to pickup entity.
 
@@ -75,7 +73,7 @@ setCancelled() -> void
 
 isCancelled() -> boolean
 
-#EntityDropEvent
+## EntityDropEvent
 
 This event is called when player try to drop entity.
 
@@ -87,7 +85,7 @@ setCancelled() -> void
 
 isCancelled() -> boolean
 
-#API manager:
+## API manager:
 
 Methods:
 
