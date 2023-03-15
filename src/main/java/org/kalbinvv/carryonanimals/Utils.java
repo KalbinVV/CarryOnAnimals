@@ -1,6 +1,7 @@
 package org.kalbinvv.carryonanimals;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kalbinvv.carryonanimals.api.ApiManager;
 import org.kalbinvv.carryonanimals.protections.ProtectionsList;
 import org.kalbinvv.carryonanimals.sounds.SoundsUtils;
 import org.kalbinvv.carryonanimals.utils.ConfigurationUtils;
@@ -41,6 +42,12 @@ public class Utils {
 					() -> {
 						return SoundsUtils.getPlaceSound().isRegistered() 
 								? "Enabled" : "Disabled";
+					}));
+			
+			metrics.addCustomChart(new Metrics.SimplePie(
+					"api_was_used", 
+					() -> {
+						return ApiManager.isApiWasUsed() ? "Yes" : "No";
 					}));
 
 			plugin.getLogger().info("Metrics enabled!");

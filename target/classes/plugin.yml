@@ -1,6 +1,6 @@
 main: org.kalbinvv.carryonanimals.CarryOnAnimals
 name: CarryOnAnimals
-version: '1.9'
+version: '2.0'
 api-version: 1.16
 description: Adds the ability to move animals on the head.
 softdepend: [Towny, WorldGuard, bStats]

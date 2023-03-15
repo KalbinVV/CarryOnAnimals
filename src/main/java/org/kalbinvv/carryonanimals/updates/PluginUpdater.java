@@ -12,7 +12,7 @@ import org.kalbinvv.carryonanimals.updates.migrations.MigrationException;
 
 public class PluginUpdater {
 
-	private static final Double LAST_PLUGIN_VERSION = 1.9;
+	private static final Double LAST_PLUGIN_VERSION = 2.0;
 	private static final String CONFIGURATION_FILE_NAME = "config.yml";
 
 	private boolean pluginWasUpdated = false;

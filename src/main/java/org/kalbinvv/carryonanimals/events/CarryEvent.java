@@ -13,6 +13,8 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.plugin.Plugin;
 import org.kalbinvv.carryonanimals.CarryOnAnimals;
+import org.kalbinvv.carryonanimals.api.events.EntityDropEvent;
+import org.kalbinvv.carryonanimals.api.events.EntityPickUpEvent;
 import org.kalbinvv.carryonanimals.protections.ProtectionsList;
 import org.kalbinvv.carryonanimals.sounds.CarrySound;
 import org.kalbinvv.carryonanimals.sounds.SoundsUtils;
@@ -31,6 +33,14 @@ public class CarryEvent implements Listener{
 
 		Entity entity = event.getRightClicked();
 		Player player = event.getPlayer();
+		
+		var entityPickUpEvent = new EntityPickUpEvent(player, entity);
+		
+		Bukkit.getPluginManager().callEvent(entityPickUpEvent);
+		
+		if(entityPickUpEvent.isCancelled()) {
+			return;
+		}
 
 		Configuration configuration = CarryOnAnimals.getPlugin().getConfig();
 
@@ -124,6 +134,14 @@ public class CarryEvent implements Listener{
 	public void onPlayerToggleSneakEvent(PlayerToggleSneakEvent event) {
 		Player player = event.getPlayer();
 
+		var entityDropEvent = new EntityDropEvent(player);
+		
+		Bukkit.getPluginManager().callEvent(entityDropEvent);
+		
+		if(entityDropEvent.isCancelled()) {
+			return;
+		}
+		
 		if(!player.isSneaking()) {
 
 			boolean hasPassengers = player.eject();

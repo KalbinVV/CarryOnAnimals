@@ -53,6 +53,10 @@ public abstract class Migration {
 				/* Current version = */ 1.8,
 				/* Migration to update = */ new MigrationTo19Version()
 				);
+		migrationsMap.put(
+				/* Current version = */ 1.9,
+				/* Migration to update = */ new MigrationTo20Version()
+				);
 	}
 
 	public abstract Double getVersionOfMigration();
