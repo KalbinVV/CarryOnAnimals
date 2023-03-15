@@ -104,4 +104,5 @@ Message that was returned if check method return false.
 getName() -> String
 
 Name of protections, it will show up in the list when admin use command "coa protections".
+
 This documentations will updated in future along with the API.
