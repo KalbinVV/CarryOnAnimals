@@ -2,12 +2,14 @@ package org.kalbinvv.carryonanimals.commands;
 
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import org.kalbinvv.carryonanimals.CarryOnAnimals;
+import org.kalbinvv.carryonanimals.api.events.ReloadEvent;
 import org.kalbinvv.carryonanimals.configuration.Reloadable;
 import org.kalbinvv.carryonanimals.protections.ProtectionsList;
 import org.kalbinvv.carryonanimals.utils.ChatUtils;
@@ -91,6 +93,10 @@ public class CarryOnAnimalsCommand implements CommandExecutor{
 
 		if(hasPermission) {
 			((Reloadable) CarryOnAnimals.getPlugin().getConfig()).reload();
+			
+			var pluginReloadEvent = new ReloadEvent();
+			
+			Bukkit.getPluginManager().callEvent(pluginReloadEvent);
 		}
 	}
 
